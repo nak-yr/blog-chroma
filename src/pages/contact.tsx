@@ -11,24 +11,19 @@ import LinkedIn from '../components/svgs/linkedin'
 
 const contacts = [
   {
-    Comp: Twitter,
-    alt: 'twitter icon',
-    link: 'https://twitter.com/_ijjk',
-  },
-  {
     Comp: GitHub,
     alt: 'github icon',
-    link: 'https://github.com/ijjk',
+    link: 'https://github.com/nak-yr',
   },
   {
     Comp: LinkedIn,
     alt: 'linkedin icon',
-    link: 'https://www.linkedin.com/in/jj-kasper-0b5392166/',
+    link: 'http://example.com',
   },
   {
     Comp: Envelope,
     alt: 'envelope icon',
-    link: 'mailto:jj@jjsweb.site?subject=Notion Blog',
+    link: 'mailto:nkwork874@gmail.com?subject=Notion Blog',
   },
 ]
 
@@ -38,15 +33,11 @@ export default function Contact() {
       <Header titlePre="Contact" />
       <div className={sharedStyles.layout}>
         <div className={contactStyles.avatar}>
-          <img src="/avatar.png" alt="avatar with letters JJ" height={60} />
+          <img src="/myavatar.jpg" alt="avatar with letters JJ" height={60} />
         </div>
-
         <h1 style={{ marginTop: 0 }}>Contact</h1>
 
-        <div className={contactStyles.name}>
-          JJ Kasper - Next.js Engineer @{' '}
-          <ExtLink href="https://vercel.com">Vercel</ExtLink>
-        </div>
+        <div className={contactStyles.name}>Koki Nakayama</div>
 
         <div className={contactStyles.links}>
           {contacts.map(({ Comp, link, alt }) => {
