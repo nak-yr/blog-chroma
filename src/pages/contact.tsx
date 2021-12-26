@@ -37,7 +37,7 @@ export default function Contact() {
         </div>
         <h1 style={{ marginTop: 0 }}>Contact</h1>
 
-        <div className={contactStyles.name}>Koki Nakayama</div>
+        <div className={contactStyles.name}>Nakayama</div>
 
         <div className={contactStyles.links}>
           {contacts.map(({ Comp, link, alt }) => {
