@@ -43,29 +43,27 @@ export default function Works() {
           <div className={sharedStyles.layout} key={title}>
             <h2>{title}</h2>
             {/*要素が存在すれば描画する*/}
-            <center>
-              {siteuri && (
-                <>
-                  <p>Site URI</p>
-                  <ExtLink key={ghuri} href={ghuri}>
-                    {siteuri}
-                  </ExtLink>
-                </>
-              )}
-              {ghuri && (
-                <>
-                  <p>GitHub URI</p>
-                  <ExtLink key={ghuri} href={ghuri}>
-                    {ghuri}
-                  </ExtLink>
-                </>
-              )}
-              {description && (
-                <>
-                  <p>Description</p> {description}
-                </>
-              )}
-            </center>
+            {siteuri && (
+              <>
+                <p>Site URI</p>
+                <ExtLink key={ghuri} href={ghuri}>
+                  {siteuri}
+                </ExtLink>
+              </>
+            )}
+            {ghuri && (
+              <>
+                <p>GitHub URI</p>
+                <ExtLink key={ghuri} href={ghuri}>
+                  {ghuri}
+                </ExtLink>
+              </>
+            )}
+            {description && (
+              <>
+                <p>Description</p> {description}
+              </>
+            )}
             <hr />
           </div>
         ))}
