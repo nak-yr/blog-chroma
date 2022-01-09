@@ -9,3 +9,12 @@
 .layout h2 {
   text-align: center;
 }
+
+.works h1,
+.works h2,
+.works h3,
+.works h4,
+.works a,
+.works p {
+  text-align: center;
+}
