@@ -6,12 +6,15 @@
 }
 
 .layout h1,
-.layout h2,
-.layout h3,
-.layout h4 {
+.layout h2 {
   text-align: center;
 }
 
-.layout p {
+.works h1,
+.works h2,
+.works h3,
+.works h4,
+.works a,
+.works p {
   text-align: center;
 }

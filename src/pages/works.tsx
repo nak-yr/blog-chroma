@@ -36,27 +36,33 @@ export default function Works() {
   return (
     <>
       <Header titlePre="Works" />
-      <div className={sharedStyles.layout}>
+      <div className={sharedStyles.works}>
         <h1>My Works</h1>
         <hr />
         {myworks.map(({ title, siteuri, ghuri, description }) => (
-          <div className={sharedStyles.layout} key={title}>
+          <div className={sharedStyles.works} key={title}>
             <h2>{title}</h2>
             {/*要素が存在すれば描画する*/}
             {siteuri && (
               <>
-                <p>Site URI</p>
-                <ExtLink key={ghuri} href={ghuri}>
-                  {siteuri}
-                </ExtLink>
+                <p>
+                  Site URI
+                  <br />
+                  <ExtLink key={ghuri} href={ghuri}>
+                    {siteuri}
+                  </ExtLink>
+                </p>
               </>
             )}
             {ghuri && (
               <>
-                <p>GitHub URI</p>
-                <ExtLink key={ghuri} href={ghuri}>
-                  {ghuri}
-                </ExtLink>
+                <p>
+                  GitHub URI
+                  <br />
+                  <ExtLink key={ghuri} href={ghuri}>
+                    {ghuri}
+                  </ExtLink>
+                </p>
               </>
             )}
             {description && (
