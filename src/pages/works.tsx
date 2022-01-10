@@ -2,6 +2,8 @@ import Header from '../components/header'
 import ExtLink from '../components/ext-link'
 import sharedStyles from '../styles/shared.module.css'
 
+import { Box, Card, CardBody, CardHeader, Grid, Heading } from 'grommet'
+
 const myworks: {
   title: string
   siteuri: string
@@ -36,43 +38,59 @@ export default function Works() {
   return (
     <>
       <Header titlePre="Works" />
+
       <div className={sharedStyles.works}>
-        <h1>My Works</h1>
-        <hr />
-        {myworks.map(({ title, siteuri, ghuri, description }) => (
-          <div className={sharedStyles.works} key={title}>
-            <h2>{title}</h2>
-            {/*要素が存在すれば描画する*/}
-            {siteuri && (
-              <>
-                <p>
-                  Site URI
-                  <br />
-                  <ExtLink key={ghuri} href={ghuri}>
-                    {siteuri}
-                  </ExtLink>
-                </p>
-              </>
-            )}
-            {ghuri && (
-              <>
-                <p>
-                  GitHub URI
-                  <br />
-                  <ExtLink key={ghuri} href={ghuri}>
-                    {ghuri}
-                  </ExtLink>
-                </p>
-              </>
-            )}
-            {description && (
-              <>
-                <p>Description</p> {description}
-              </>
-            )}
-            <hr />
-          </div>
-        ))}
+        <Heading color="brand" margin="medium" size="large" textAlign="center">
+          My Works
+        </Heading>
+        <Box
+          align="center"
+          animation="fadeIn"
+          direction="column"
+          pad="medium"
+          gap="medium"
+        >
+          {myworks.map(({ title, siteuri, ghuri, description }) => (
+            <Card key={title} background="light-2" height="100%" width="large">
+              <CardHeader
+                justify="center"
+                pad={{ horizontal: 'medium', vertical: 'small' }}
+              >
+                <Heading level={2} size="medium">
+                  {title}
+                </Heading>
+              </CardHeader>
+              {/*要素が存在すれば描画する*/}
+              <CardBody pad="medium" align="center">
+                {siteuri && (
+                  <>
+                    Site URI
+                    <br />
+                    <ExtLink key={siteuri} href={siteuri}>
+                      {siteuri}
+                    </ExtLink>
+                  </>
+                )}
+                {ghuri && (
+                  <>
+                    GitHub URI
+                    <br />
+                    <ExtLink key={ghuri} href={ghuri}>
+                      {ghuri}
+                    </ExtLink>
+                  </>
+                )}
+                {description && (
+                  <>
+                    Description
+                    <br />
+                    {description}
+                  </>
+                )}
+              </CardBody>
+            </Card>
+          ))}
+        </Box>
       </div>
     </>
   )

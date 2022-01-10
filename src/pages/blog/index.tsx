@@ -13,6 +13,8 @@ import { textBlock } from '../../lib/notion/renderers'
 import getNotionUsers from '../../lib/notion/getNotionUsers'
 import getBlogIndex from '../../lib/notion/getBlogIndex'
 
+import { Heading } from 'grommet'
+
 export async function getStaticProps({ preview }) {
   const postsTable = await getBlogIndex()
 
@@ -63,7 +65,9 @@ const Index = ({ posts = [], preview }) => {
         </div>
       )}
       <div className={`${sharedStyles.layout} ${blogStyles.blogIndex}`}>
-        <h1>Chroma</h1>
+        <Heading color="brand" size="large" margin="medium" textAlign="center">
+          Blog
+        </Heading>
         {posts.length === 0 && (
           <p className={blogStyles.noPosts}>There are no posts yet</p>
         )}
