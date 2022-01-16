@@ -523,7 +523,6 @@ const RenderPost = ({ post, redirect, preview }) => {
               }
               break
           }
-          console.log(toRender)
           return toRender
         })}
       </div>
