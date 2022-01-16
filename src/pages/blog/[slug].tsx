@@ -2,7 +2,7 @@ import Link from 'next/link'
 import fetch from 'node-fetch'
 import { useRouter } from 'next/router'
 import Header from '../../components/header'
-import Heading from '../../components/heading'
+import NextHeading from '../../components/heading'
 import components from '../../components/dynamic'
 import ReactJSXParser from '@zeit/react-jsx-parser'
 import blogStyles from '../../styles/blog.module.css'
@@ -12,6 +12,8 @@ import React, { CSSProperties, useEffect } from 'react'
 import getBlogIndex from '../../lib/notion/getBlogIndex'
 import getNotionUsers from '../../lib/notion/getNotionUsers'
 import { getBlogLink, getDateStr } from '../../lib/blog-helpers'
+
+import { Heading } from 'grommet'
 
 // Get the data for each blog post
 export async function getStaticProps({ params: { slug }, preview }) {
@@ -130,7 +132,8 @@ const RenderPost = ({ post, redirect, preview }) => {
     return (
       <div className={blogStyles.post}>
         <p>
-          Woops! didn't find that post, redirecting you back to the blog index
+          Woops! did&apos;t find that post, redirecting you back to the blog
+          index
         </p>
       </div>
     )
@@ -151,7 +154,10 @@ const RenderPost = ({ post, redirect, preview }) => {
         </div>
       )}
       <div className={blogStyles.post}>
-        <h1>{post.Page || ''}</h1>
+        <Heading color="neutral-3" size="large" margin="auto">
+          {' '}
+          {post.Page || ''}
+        </Heading>
         {post.Authors.length > 0 && (
           <div className="authors">By: {post.Authors.join(' ')}</div>
         )}
@@ -221,11 +227,54 @@ const RenderPost = ({ post, redirect, preview }) => {
           }
 
           const renderHeading = (Type: string | React.ComponentType) => {
-            toRender.push(
-              <Heading key={id}>
-                <Type key={id}>{textBlock(properties.title, true, id)}</Type>
-              </Heading>
-            )
+            // 主にH1系ヘッダのタグづけを行うための関数
+            // 引数Typeの内容に応じて、Grommetのヘッダを適用する
+            // ヘッダのレベルは、<Heading>タグのlevelオプションで適用している
+            switch (Type) {
+              case 'h1':
+              case 'h2':
+              case 'h3':
+                // levelオプションに適用する変数。型指定が数字か文字の1~6だったため、型定義がこんな感じになった
+                let level:
+                  | 1
+                  | '1'
+                  | 2
+                  | 3
+                  | 4
+                  | 5
+                  | 6
+                  | '2'
+                  | '3'
+                  | '4'
+                  | '5'
+                  | '6'
+                if (Type === 'h1') level = '1'
+                else if (Type === 'h2') level = '2'
+                else if (Type === 'h3') level = '3'
+                toRender.push(
+                  <NextHeading key={id}>
+                    <Heading
+                      key={id}
+                      level={level}
+                      color="neutral-3"
+                      size="large"
+                      margin="auto"
+                    >
+                      {textBlock(properties.title, true, id)}
+                    </Heading>
+                  </NextHeading>
+                )
+                break
+              default:
+                toRender.push(
+                  <NextHeading key={id}>
+                    <Type key={id}>
+                      {textBlock(properties.title, true, id)}
+                    </Type>
+                  </NextHeading>
+                )
+                break
+            }
           }
 
           const renderBookmark = ({ link, title, description, format }) => {
@@ -474,6 +523,7 @@ const RenderPost = ({ post, redirect, preview }) => {
               }
               break
           }
+          console.log(toRender)
           return toRender
         })}
       </div>

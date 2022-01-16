@@ -14,7 +14,7 @@ import { textBlock } from '../lib/notion/renderers'
 import getNotionUsers from '../lib/notion/getNotionUsers'
 import getBlogIndex from '../lib/notion/getBlogIndex'
 
-import { Box, Heading, Text } from 'grommet'
+import { Box, Button, Heading, Text } from 'grommet'
 
 import blogStyles from '../styles/blog.module.css'
 
@@ -65,25 +65,25 @@ export default function Index({ posts = [], preview }) {
         <Heading margin="medium" color="brand" size="large" textAlign="center">
           Chroma
         </Heading>
-        <Box background="light-3">
-          <Text size="large" margin="medium" textAlign="center">
-            nak-yr&apos;s personal blog
-          </Text>
-        </Box>
+
         {/*<Features />*/}
 
-        <div className="explanation">
-          <Text color="dark-3">
-            興味のある技術を使って作成している個人的なブログです。
-            <br />
-            現状ではバックエンドにNotion、フロントエンドにNext.jsを使用しています。
-            <br />
-            デザインフレームワークはGrommetを用いています。
-          </Text>
-        </div>
+        <Text
+          color="dark-3"
+          margin="large"
+          textAlign="center"
+          as="div"
+          size="large"
+        >
+          興味のある技術を使って作成している個人的なブログです。
+          <br />
+          バックエンドにNotion、フロントエンドにNext.jsを使用しています。
+          <br />
+          デザインフレームワークはGrommetを用いています。
+        </Text>
 
-        <Heading level={2} size="large">
-          <b>Recent Posts</b>
+        <Heading level={2} margin="medium" size="large" textAlign="center">
+          Recent Posts
         </Heading>
 
         {preview && (
@@ -130,9 +130,11 @@ export default function Index({ posts = [], preview }) {
               </p>
             </div>
           ))}
-          <h2>
-            <Link href={`/blog`}>View More Posts</Link>
-          </h2>
+          <Box margin="large" alignSelf="center">
+            <Link href={`/blog`}>
+              <Button label="More Posts" margin="auto"></Button>
+            </Link>
+          </Box>
         </div>
       </div>
     </>
