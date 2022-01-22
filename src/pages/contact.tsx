@@ -9,6 +9,8 @@ import Twitter from '../components/svgs/twitter'
 import Envelope from '../components/svgs/envelope'
 import LinkedIn from '../components/svgs/linkedin'
 
+import { Heading } from 'grommet'
+
 const contacts = [
   {
     Comp: GitHub,
@@ -32,12 +34,14 @@ export default function Contact() {
     <>
       <Header titlePre="Contact" />
       <div className={sharedStyles.layout}>
+        <Heading margin="large" textAlign="center" size="large" color="brand">
+          Contact
+        </Heading>
         <div className={contactStyles.avatar}>
           <img src="/myavatar.png" alt="myavater" height={60} />
         </div>
-        <h1 style={{ marginTop: 0 }}>Contact</h1>
 
-        <div className={contactStyles.name}>Nakayama</div>
+        <div className={contactStyles.name}>nak-yr</div>
 
         <div className={contactStyles.links}>
           {contacts.map(({ Comp, link, alt }) => {

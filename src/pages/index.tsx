@@ -14,6 +14,8 @@ import { textBlock } from '../lib/notion/renderers'
 import getNotionUsers from '../lib/notion/getNotionUsers'
 import getBlogIndex from '../lib/notion/getBlogIndex'
 
+import { Box, Button, Heading, Text } from 'grommet'
+
 import blogStyles from '../styles/blog.module.css'
 
 export async function getStaticProps({ preview }) {
@@ -60,21 +62,29 @@ export default function Index({ posts = [], preview }) {
     <>
       <Header titlePre="Home" />
       <div className={sharedStyles.layout}>
-        <h1>Chroma</h1>
-        <h2>技術系の話題を中心に書いていく個人ブログ</h2>
+        <Heading margin="medium" color="brand" size="large" textAlign="center">
+          Chroma
+        </Heading>
 
         {/*<Features />*/}
 
-        <div className="explanation">
-          <p>
-            NotionをHeadless
-            CMSとして利用し、フロントエンドはNext.jsを用いたSSR/SSGで作成しようとしているブログです。
-          </p>
-        </div>
+        <Text
+          color="dark-3"
+          margin="large"
+          textAlign="center"
+          as="div"
+          size="large"
+        >
+          興味のある技術を使って作成している個人的なブログです。
+          <br />
+          バックエンドにNotion、フロントエンドにNext.jsを使用しています。
+          <br />
+          デザインフレームワークはGrommetを用いています。
+        </Text>
 
-        <h2>
-          <b>Recent Posts</b>
-        </h2>
+        <Heading level={2} margin="medium" size="large" textAlign="center">
+          Recent Posts
+        </Heading>
 
         {preview && (
           <div className={blogStyles.previewAlertContainer}>
@@ -120,9 +130,11 @@ export default function Index({ posts = [], preview }) {
               </p>
             </div>
           ))}
-          <h2>
-            <Link href={`/blog`}>View More Posts</Link>
-          </h2>
+          <Box margin="large" alignSelf="center">
+            <Link href={`/blog`}>
+              <Button label="More Posts" margin="auto"></Button>
+            </Link>
+          </Box>
         </div>
       </div>
     </>
