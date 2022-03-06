@@ -62,7 +62,12 @@ export default function Index({ posts = [], preview }) {
     <>
       <Header titlePre="Home" />
       <div className={sharedStyles.layout}>
-        <Heading margin="medium" color="brand" size="large" textAlign="center">
+        <Heading
+          margin="medium"
+          color="neutral-3"
+          size="large"
+          textAlign="center"
+        >
           Chroma
         </Heading>
 

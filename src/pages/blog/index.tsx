@@ -65,7 +65,12 @@ const Index = ({ posts = [], preview }) => {
         </div>
       )}
       <div className={`${sharedStyles.layout} ${blogStyles.blogIndex}`}>
-        <Heading color="brand" size="large" margin="medium" textAlign="center">
+        <Heading
+          color="neutral-3"
+          size="large"
+          margin="medium"
+          textAlign="center"
+        >
           Blog
         </Heading>
         {posts.length === 0 && (
