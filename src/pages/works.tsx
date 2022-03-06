@@ -33,7 +33,12 @@ export default function Works() {
       <Header titlePre="Works" />
 
       <div className={sharedStyles.works}>
-        <Heading color="brand" margin="medium" size="large" textAlign="center">
+        <Heading
+          color="neutral-3"
+          margin="medium"
+          size="large"
+          textAlign="center"
+        >
           My Works
         </Heading>
         <Box align="center" direction="column" pad="medium" gap="medium">

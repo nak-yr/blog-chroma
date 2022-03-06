@@ -34,7 +34,12 @@ export default function Contact() {
     <>
       <Header titlePre="Contact" />
       <div className={sharedStyles.layout}>
-        <Heading margin="large" textAlign="center" size="large" color="brand">
+        <Heading
+          margin="large"
+          textAlign="center"
+          size="large"
+          color="neutral-3"
+        >
           Contact
         </Heading>
         <div className={contactStyles.avatar}>
