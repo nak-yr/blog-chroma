@@ -13,7 +13,7 @@ import { textBlock } from '../../lib/notion/renderers'
 import getNotionUsers from '../../lib/notion/getNotionUsers'
 import getBlogIndex from '../../lib/notion/getBlogIndex'
 
-import { Heading } from 'grommet'
+import { Box, Heading, Text } from 'grommet'
 
 export async function getStaticProps({ preview }) {
   const postsTable = await getBlogIndex()
@@ -76,33 +76,34 @@ const Index = ({ posts = [], preview }) => {
         {posts.length === 0 && (
           <p className={blogStyles.noPosts}>There are no posts yet</p>
         )}
-        {posts.map((post) => {
+        {posts.map((post, counter) => {
           return (
-            <div className={blogStyles.postPreview} key={post.Slug}>
-              <h3>
+            <Box margin="auto" pad="small" width="large" key={post.Slug}>
+              <Heading level="3" textAlign="start">
                 <span className={blogStyles.titleContainer}>
                   {!post.Published && (
                     <span className={blogStyles.draftBadge}>Draft</span>
                   )}
                   <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
-                    <a>{post.Page}</a>
+                    <a color="black">{post.Page}</a>
                   </Link>
                 </span>
-              </h3>
+              </Heading>
               {post.Authors.length > 0 && (
                 <div className="authors">By: {post.Authors.join(' ')}</div>
               )}
               {post.Date && (
-                <div className="posted">Posted: {getDateStr(post.Date)}</div>
+                <div className="posted">
+                  <Text color="dark-3">{getDateStr(post.Date)}</Text>
+                </div>
               )}
-              <p>
-                {(!post.preview || post.preview.length === 0) &&
-                  'No preview available'}
-                {(post.preview || []).map((block, idx) =>
-                  textBlock(block, true, `${post.Slug}${idx}`)
-                )}
-              </p>
-            </div>
+              {(!post.preview || post.preview.length === 0) && (
+                <Text color="dark-3">No preview available</Text>
+              )}
+              {(post.preview || []).map((block, idx) =>
+                textBlock(block, true, `${post.Slug}${idx}`)
+              )}
+            </Box>
           )
         })}
       </div>
