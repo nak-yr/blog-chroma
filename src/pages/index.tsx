@@ -136,9 +136,13 @@ export default function Index({ posts = [], preview }) {
             </div>
           ))}
           <Box margin="large" alignSelf="center">
-            <Link href={`/blog`}>
-              <Button label="More Posts" margin="auto"></Button>
-            </Link>
+            <Button
+              primary
+              label="More Posts"
+              margin="auto"
+              color="neutral-3"
+              href="/blog"
+            ></Button>
           </Box>
         </div>
       </div>
