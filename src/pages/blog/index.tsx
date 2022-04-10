@@ -95,19 +95,18 @@ const Index = ({ posts = [], preview }) => {
                 border={{
                   size: 'small',
                   style: 'solid',
-                  color: 'light-4',
+                  color: 'light-6',
                 }}
                 margin="auto"
                 pad="small"
                 width="large"
                 round
-                background="light-1"
                 focusIndicator={false}
                 hoverIndicator={{
                   background: {
                     color: 'background-contrast',
                   },
-                  elevation: 'medium',
+                  elevation: 'small',
                 }}
                 onClick={() => {
                   handleClick(getBlogLink(post.Slug))
@@ -119,14 +118,13 @@ const Index = ({ posts = [], preview }) => {
                   size="medium"
                   textAlign="start"
                   margin="medium"
+                  color="dark-3"
                 >
                   <span className={blogStyles.titleContainer}>
                     {!post.Published && (
                       <span className={blogStyles.draftBadge}>Draft</span>
                     )}
-                    <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
-                      <a color="black">{post.Page}</a>
-                    </Link>
+                    {post.Page}
                   </span>
                 </Heading>
                 {post.Authors.length > 0 && (

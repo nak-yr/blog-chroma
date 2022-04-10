@@ -17,6 +17,7 @@ import getBlogIndex from '../lib/notion/getBlogIndex'
 import { Box, Button, Heading, Text } from 'grommet'
 
 import blogStyles from '../styles/blog.module.css'
+import { useRouter } from 'next/router'
 
 export async function getStaticProps({ preview }) {
   const postsTable = await getBlogIndex()
@@ -58,6 +59,16 @@ export async function getStaticProps({ preview }) {
 }
 
 export default function Index({ posts = [], preview }) {
+  const router = useRouter()
+
+  const handleClick = (as) => {
+    let url = '/blog/[slug]'
+    // preventDefaultを使いたいのでeventを引数にしたい。
+    // でも112行目でeventをどう関数に渡せばいいのかわからないので、その方法を調べる。
+    // (preventDefaultがないとなんかページ遷移が遅い気がする)
+    //e.preventDefault()
+    router.push(url, as)
+  }
   return (
     <>
       <Header titlePre="Home" />
@@ -105,39 +116,77 @@ export default function Index({ posts = [], preview }) {
           </div>
         )}
         <div className={`${sharedStyles.layout} ${blogStyles.blogIndex}`}>
-          {posts.length === 0 && (
-            <p className={blogStyles.noPosts}>There are no posts yet</p>
-          )}
-          {posts.map((post) => (
-            <div className={blogStyles.postPreview} key={post.Slug}>
-              <h3>
-                <span className={blogStyles.titleContainer}>
-                  {!post.Published && (
-                    <span className={blogStyles.draftBadge}>Draft</span>
+          <Box margin="auto" direction="column" gap="medium">
+            {posts.length === 0 && (
+              <p className={blogStyles.noPosts}>There are no posts yet</p>
+            )}
+            {posts.map((post) => {
+              return (
+                <Box
+                  border={{
+                    size: 'small',
+                    style: 'solid',
+                    color: 'light-6',
+                  }}
+                  margin="auto"
+                  pad="small"
+                  width="large"
+                  round
+                  focusIndicator={false}
+                  hoverIndicator={{
+                    background: {
+                      color: 'background-contrast',
+                    },
+                    elevation: 'small',
+                  }}
+                  onClick={() => {
+                    handleClick(getBlogLink(post.Slug))
+                  }}
+                  key={post.Slug}
+                >
+                  <Heading
+                    level="3"
+                    size="medium"
+                    textAlign="start"
+                    margin="medium"
+                    color="dark-3"
+                  >
+                    <span className={blogStyles.titleContainer}>
+                      {!post.Published && (
+                        <span className={blogStyles.draftBadge}>Draft</span>
+                      )}
+                      {post.Page}
+                    </span>
+                  </Heading>
+                  {post.Authors.length > 0 && (
+                    <div className="authors">By: {post.Authors.join(' ')}</div>
                   )}
-                  <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
-                    <a>{post.Page}</a>
-                  </Link>
-                </span>
-              </h3>
-              {post.Authors.length > 0 && (
-                <div className="authors">By: {post.Authors.join(' ')}</div>
-              )}
-              {post.Date && (
-                <div className="posted">Posted: {getDateStr(post.Date)}</div>
-              )}
-              <p>
-                {(!post.preview || post.preview.length === 0) &&
-                  'No preview available'}
-                {(post.preview || []).map((block, idx) =>
-                  textBlock(block, true, `${post.Slug}${idx}`)
-                )}
-              </p>
-            </div>
-          ))}
+                  {post.Date && (
+                    <Text color="dark-3" margin="xsmall" size="small">
+                      {getDateStr(post.Date)}
+                    </Text>
+                  )}
+                  <Text color="dark-3" margin="xsmall" size="small">
+                    {(!post.preview || post.preview.length === 0) &&
+                      'No preview available'}
+                    {(post.preview || []).map((block, idx) =>
+                      textBlock(block, true, `${post.Slug}${idx}`)
+                    )}
+                  </Text>
+                </Box>
+              )
+            })}
+          </Box>{' '}
           <Box margin="large" alignSelf="center">
             <Button
-              primary
+              secondary
+              focusIndicator={false}
+              hoverIndicator={{
+                background: {
+                  color: 'neutral-3',
+                },
+                elevation: 'none',
+              }}
               label="More Posts"
               margin="auto"
               color="neutral-3"
