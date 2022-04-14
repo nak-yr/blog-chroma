@@ -51,6 +51,8 @@ export async function getStaticProps({ preview }) {
 }
 
 const Index = ({ posts = [], preview }) => {
+  // ブログ記事のカード(Box)をクリックした時、記事詳細に飛ぶ実装にしている
+  // クリック判定はBoxコンポーネントのonClickで実施しているため、そこでしてするクリック時のアクションとしてhandleClick関数を定義している
   const router = useRouter()
 
   const handleClick = (as) => {
@@ -58,7 +60,9 @@ const Index = ({ posts = [], preview }) => {
     // preventDefaultを使いたいのでeventを引数にしたい。
     // でも112行目でeventをどう関数に渡せばいいのかわからないので、その方法を調べる。
     // (preventDefaultがないとなんかページ遷移が遅い気がする)
-    //e.preventDefault()
+    event.preventDefault()
+    // onClickでのページ遷移は、router.push()を用いることで可能
+    // URLの[slug]部分は対象記事により変わるので、引数として受け取っているasをこの関数の引数にも指定する。
     router.push(url, as)
   }
 
@@ -95,7 +99,7 @@ const Index = ({ posts = [], preview }) => {
                 border={{
                   size: 'small',
                   style: 'solid',
-                  color: 'light-6',
+                  color: 'dark-4',
                 }}
                 margin="auto"
                 pad="small"

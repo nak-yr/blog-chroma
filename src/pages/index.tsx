@@ -126,7 +126,7 @@ export default function Index({ posts = [], preview }) {
                   border={{
                     size: 'small',
                     style: 'solid',
-                    color: 'light-6',
+                    color: 'dark-4',
                   }}
                   margin="auto"
                   pad="small"
