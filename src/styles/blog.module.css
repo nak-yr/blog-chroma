@@ -65,7 +65,7 @@
 .postPreview {
   max-width: 600px;
   margin: 10px auto;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+  border-bottom: none;
 }
 
 .postPreview:last-child {
@@ -130,7 +130,8 @@
 }
 
 .post :global(hr) {
-  margin-bottom: 2em;
+  /*margin-bottom: 2em;*/
+  width: 100%;
 }
 
 .post :global(a + p) {
