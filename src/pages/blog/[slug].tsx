@@ -13,7 +13,7 @@ import getBlogIndex from '../../lib/notion/getBlogIndex'
 import getNotionUsers from '../../lib/notion/getNotionUsers'
 import { getBlogLink, getDateStr } from '../../lib/blog-helpers'
 
-import { Heading } from 'grommet'
+import { Box, Heading, Text } from 'grommet'
 
 // Get the data for each blog post
 export async function getStaticProps({ params: { slug }, preview }) {
@@ -153,8 +153,25 @@ const RenderPost = ({ post, redirect, preview }) => {
           </div>
         </div>
       )}
-      <div className={blogStyles.post}>
-        <Heading color="neutral-3" size="large" margin="auto">
+      {/*ブログ記事表示部*/}
+      <Box
+        as="div"
+        className={blogStyles.post}
+        margin={{
+          top: 'none',
+          bottom: 'none',
+          left: 'medium',
+          right: 'medium',
+        }}
+        pad={{
+          top: 'none',
+          bottom: 'none',
+          left: 'medium',
+          right: 'medium',
+        }}
+        gap="small"
+      >
+        <Heading color="neutral-3" size="medium" margin="small">
           {' '}
           {post.Page || ''}
         </Heading>
@@ -162,7 +179,9 @@ const RenderPost = ({ post, redirect, preview }) => {
           <div className="authors">By: {post.Authors.join(' ')}</div>
         )}
         {post.Date && (
-          <div className="posted">Posted: {getDateStr(post.Date)}</div>
+          <Text color="dark-3" margin="small" size="medium">
+            Posted: {getDateStr(post.Date)}
+          </Text>
         )}
 
         <hr />
@@ -525,7 +544,7 @@ const RenderPost = ({ post, redirect, preview }) => {
           }
           return toRender
         })}
-      </div>
+      </Box>
     </>
   )
 }

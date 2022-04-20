@@ -254,6 +254,7 @@ figure {
 a {
   color: #777777;
   text-decoration: none;
+  word-break: break-all;
 }
 a:hover {
   color: #3291ff;
