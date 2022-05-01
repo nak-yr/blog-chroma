@@ -10,6 +10,7 @@ const myworks: {
   siteuri: string
   ghuri: string
   description: string
+  topic: string[]
 }[] = [
   {
     title: '1ページPDFをPNG形式に変換するツール',
@@ -17,6 +18,7 @@ const myworks: {
     ghuri: 'https://github.com/nak-yr/convert_pdf-to-png',
     description:
       'PDF形式で出力される画像データは、パワーポイント等に貼ろうとすると難儀するので、PNG形式に変換するために作成しました。Pythonスクリプトで、単一ページPDFの場合にのみ使用可能です。ソースコードをGitHubに公開しています。',
+    topic: ['python'],
   },
   {
     title: '簡易的なコロナ情報サイト',
@@ -24,6 +26,7 @@ const myworks: {
     ghuri: 'https://github.com/nak-yr/simpleinfo-covid19',
     description:
       '国が公開しているjson形式のコロナ関連の情報を、わかりやすい指標でまとめたサイトです。',
+    topic: ['React', 'firebase', 'hosting'],
   },
 ]
 
@@ -41,13 +44,40 @@ export default function Works() {
         >
           My Works
         </Heading>
-        <Box align="center" direction="column" pad="medium" gap="medium">
-          {myworks.map(({ title, siteuri, ghuri, description }) => (
-            <Box key={title} align="center">
+        <Box
+          align="center"
+          direction="row-responsive"
+          pad="medium"
+          gap="medium"
+          justify="center"
+        >
+          {myworks.map(({ title, siteuri, ghuri, description, topic }) => (
+            <Box
+              key={title}
+              align="center"
+              alignSelf="start"
+              border={{
+                size: 'small',
+                style: 'solid',
+                color: 'dark-4',
+              }}
+              pad="medium"
+              round
+            >
               <Heading level={2} size="medium">
                 {title}
               </Heading>
               {/*要素が存在すれば描画する*/}
+              {topic && (
+                <Paragraph
+                  textAlign="center"
+                  size="large"
+                  margin="medium"
+                  color="dark-3"
+                >
+                  {topic.join(' / ')}
+                </Paragraph>
+              )}
               {description && (
                 <Paragraph
                   textAlign="center"
